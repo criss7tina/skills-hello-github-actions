@@ -1,6 +1,6 @@
 name: Post welcome comment
 on: 
-    pull_request: 
+    pull-request: 
       types: [opened]
     permissions:
-      pull_request: write
+      pull-request: write
