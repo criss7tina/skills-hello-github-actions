@@ -1,18 +1,19 @@
-name: Post welcome comment
+name: Step 5
+
 on:
   pull_request:
-    types: [opened]
+    branches:
+      - main
+    types:
+      - closed
+
 permissions:
-  pull-requests: write
-jobs:
-  welcome:
-    name: Post welcome comment
-    runs-on: ubuntu-latest
-    steps:
-      - run: gh pr comment "$PR_URL" --body "Welcome to the repository!"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_URL: ${{ github.event.pull_request.html_url }}
+  contents: write
+  actions: write
+  issues: write
+
+env:
+  REVIEW_FILE: ".github/steps/x-review.md"
 
 jobs:
   find_exercise:
@@ -56,3 +57,4 @@ jobs:
         run: gh workflow disable "${{github.workflow}}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
